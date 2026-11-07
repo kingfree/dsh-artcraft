@@ -7,6 +7,21 @@ history; where the record is incomplete the entry says so instead of guessing.
 Released versions are exactly the git tags listed below. Versions without a
 tag (planned but never published) are **not** given entries.
 
+## [0.4.0] -- 2026-11-08
+
+Fork release: [`kingfree/dsh-artcraft`](https://github.com/kingfree/dsh-artcraft).
+
+### Added
+- `feat(skills)`: the `craft-app-cli` skill — routes a file to the matching
+  headless CLI by extension (`.docx`/`.xlsx`/`.pptx`/`.pdf`/`.psd`/`.ai`/`.indd`/
+  `.fig`/`.aep`/`.dwg`/`.dxf`/`.step`/`.tcraft`/`.sbs`/`.wav` …), with
+  `list` / `find` / `route` / `formats` / pass-through in
+  `skills/craft-app-cli/scripts/craft-cli.ps1`, and a measured reference for
+  all 17 CLIs (install paths, `--help` subcommands, read/write formats, MCP,
+  format gaps) in `skills/craft-app-cli/references/apps.md`.
+- `docs`: README / README.zh-CN.md sections for the file-format routing skill;
+  `skills/README.md` index updated to thirteen skills.
+
 ## [0.3.1] -- 2026-10-17
 
 ### Fixed

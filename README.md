@@ -12,6 +12,8 @@
 
 ---
 
+> **This repository is a [kingfree](https://github.com/kingfree) fork.** On top of upstream `@ninkch/dsh-artcraft` it adds the `craft-app-cli` file-format routing skill (see "File-format routing" below): a document/image/design/CAD/video/audio file goes straight to the matching family member's headless CLI — no GUI, no Python parser. Everything else matches upstream.
+
 ## Why this exists
 
 [ArtCraft](https://getartcraft.com/apps) is a family of **fourteen** free, fair-source reinventions
@@ -162,6 +164,24 @@ artcraft_cli  { bin:"photocraft", args:["batch","--actions","demo/craft/grade.js
 | `artcraft_live` | Control-channel liveness: which apps are running right now (ready for live tuning) |
 | `artcraft_recipes` | Built-in expert recipes (8 workflows) **and 14 task→skill→command chains** (short-drama episode, script→storyboard, RAW batch, film study, audio post, composite shot, design system, document delivery, batch vertical reframe, cover/thumbnail pack, multilingual subtitles, cleanup/restore, social pack, long-form clips) |
 | `artcraft_update` | The plugin's own update (check / apply) |
+
+## File-format routing: `craft-app-cli`
+
+The plugin now bundles a `craft-app-cli` skill: hand it a `.docx` `.xlsx` `.pptx` `.pdf` `.psd` `.ai` `.indd` `.fig` `.aep` `.dwg` `.dxf` `.step` `.tcraft` `.sbs` `.wav` file and it routes to the matching family member's headless CLI — no app window, no Python parser. A locator script and a measured reference ship with the skill.
+
+```powershell
+# skill folder: skills\craft-app-cli\
+$sk = '<repo>\skills\craft-app-cli\scripts\craft-cli.ps1'
+
+& $sk list                  # which of the 17 CLIs are installed, and where
+& $sk route .\report.docx   # ready-to-run commands for this extension
+& $sk wordcraft convert .\report.docx .\report.md
+& $sk pdfcraft text .\scan.pdf
+```
+
+- Covers 17 CLIs: 16 family members plus third-party SolidCraft; `Craft Anything` for unknown files; `ArtCraft Studio` has no headless CLI.
+- Gaps are reported honestly: `.prproj` (export FCPXML/AAF/OTIO first), `.indb/.indl`, `.key/.pages/.numbers`, `.indd` (read-only, cannot save back).
+- Details: `skills/craft-app-cli/references/apps.md` — per-CLI install paths, subcommands, read/write formats, MCP, gaps (measured on this machine).
 
 ## Driving it from the browser
 

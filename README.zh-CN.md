@@ -12,6 +12,8 @@
 
 ---
 
+> **本仓库是 [kingfree](https://github.com/kingfree) 的 fork。** 在上游 `@ninkch/dsh-artcraft` 的基础上新增了 `craft-app-cli` 文件格式路由技能（见下文「文件格式路由」）：拿到常见商业软件文件时，直接路由到对应家族成员的无头 CLI，不需要 GUI，也不需要 Python 解析器。其余内容与上游一致。
+
 ## 为什么做这个
 
 [ArtCraft](https://getartcraft.com/apps) 是一套用纯 Rust 从零重写的免费公平源代码（fair source）
@@ -147,6 +149,24 @@ artcraft_cli  { bin:"photocraft", args:["batch","--actions","demo/craft/grade.js
 | `artcraft_live` | 控制通道活性探测：哪些 App 正开着（可直接"边看边调"） |
 | `artcraft_recipes` | 内置专家配方（8 套）**与 14 条「任务→技能→命令链」编排**（短剧成片、剧本到分镜、RAW 冲洗、拉片分析、音频后期、合成镜头、设计系统、文档交付、批量横转竖、封面包装、多语言字幕、素材清理修复、社交分包、长素材切片） |
 | `artcraft_update` | 插件自身更新（检查 / 应用） |
+
+## 文件格式路由：`craft-app-cli`
+
+插件多带一个技能 `craft-app-cli`：拿到 `.docx` `.xlsx` `.pptx` `.pdf` `.psd` `.ai` `.indd` `.fig` `.aep` `.dwg` `.dxf` `.step` `.tcraft` `.sbs` `.wav` 这类文件时，不需要打开任何 App，也不需要写 Python 解析器 —— 它按扩展名把文件路由到对应家族成员的无头 CLI，并随技能附带定位脚本与实测参考。
+
+```powershell
+# 技能目录：skills\craft-app-cli\
+$sk = '<本仓库>\skills\craft-app-cli\scripts\craft-cli.ps1'
+
+& $sk list                  # 17 个 CLI 谁装了、路径在哪
+& $sk route .\report.docx   # 按扩展名给出可直接执行的命令
+& $sk wordcraft convert .\report.docx .\report.md
+& $sk pdfcraft text .\scan.pdf
+```
+
+- 覆盖 17 个 CLI：家族 16 个 + 第三方 SolidCraft；`Craft Anything` 用于未知格式初查；`ArtCraft Studio` 没有无头 CLI。
+- 缺口如实告知：`.prproj`（需先在 Premiere 导出 FCPXML/AAF/OTIO）、`.indb/.indl`、`.key/.pages/.numbers`、`.indd`（只读，不能写回）。
+- 细节见 `skills/craft-app-cli/references/apps.md`：17 个 CLI 的安装路径、子命令、读写格式、MCP 接入与格式缺口（本机实测）。
 
 ## 在浏览器里驱动
 

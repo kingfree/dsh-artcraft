@@ -1,6 +1,6 @@
 # ArtCraft craft skill pack (bundled with @ninkch/dsh-artcraft)
 
-Twelve skills ship inside this plugin. They are registered through the plugin's own skill
+Thirteen skills ship inside this plugin. They are registered through the plugin's own skill
 provider (`@ninkch/dsh-artcraft/skills`) and load on demand — you never install them separately.
 
 Skill bodies are written in Chinese (the maintainer's language and the language of the rest of the
@@ -21,11 +21,13 @@ so you know which skill to open.
 | `artcraft-batch-pipeline` | Batch and pipeline work: headless batch formats, HTTP job queue, in-app queues, proxies and cache, media health/relink, incremental and resumable runs, retries, QC hook-up | Dozens/hundreds of files, a whole season |
 | `artcraft-multicam` | Multicam: build sources, align, grid browsing, `selectCamera*` vs `cutToCamera*`, live switching, audio-follows-video, cross-camera matching, switching rhythm | Interviews, concerts, live cuts |
 | `artcraft-director-lens` | 20 director lenses (Spielberg…Wong Kar-wai, Zhang Yimou, Bi Gan…): each maps a director's working method to ArtCraft parameters — ASL targets, transition bias, light ratio, palette→mixer channels, sound rules, QC hooks. | "Cut/grade this like <director>", style bible references a lens |
+| `craft-app-cli` | File-format routing without a GUI: which `<app>-cli` handles `.docx .xlsx .pptx .pdf .psd .ai .indd .fig .aep .dwg .dxf .step .tcraft .sbs .wav …`, how to locate the binaries, `info`/`text`/`convert`/`render`/`run`/`batch`/`mcp` patterns, and what no app can open (`.prproj`, `.key`, `.indb`, …) | Any task that receives a document/image/design/CAD/video/audio file and must inspect, convert or batch-process it headlessly |
 
 ## Reference files (loaded with a skill)
 
 | File | Contents |
 |---|---|
+| `craft-app-cli/references/apps.md` | Measured headless-CLI reference for all 17 CLIs: extension→app routing, Windows/macOS/Linux install paths, `--help` subcommands, read/write formats, MCP, format gaps (2026-11-08) |
 | `artcraft-ops/references/command-families.md` | Measured command families of all 14 apps |
 | `artcraft-color-light/references/develop-controls.md` | All 122 LightCraft develop controls by section |
 | `artcraft-color-light/references/lumetri-and-scopes.md` | Lumetri/LUT/scopes interface (verified) |
