@@ -61,7 +61,7 @@ CLI 缺失时按打印的安装页安装对应 app（或 DSH 里用 artcraft 插
 | `.step` `.stp` `.iges` `.igs` `.3mf` `.stl` `.obj` | SolidCraft / `solidcraft-cli` | `run --in … --out …` `snapshot` |
 | `.cany` / 未知格式 | Craft Anything / `craft-anything-cli` | `triage`（初查，不是格式转换） |
 
-**没有可用 app 的格式**（如实告知，不要硬试）：`.prproj`（FilmCraft 明确打不开，需 Premiere 先导 FCPXML/AAF/OTIO）、`.indb` `.indl`、`.key` `.pages` `.numbers`；ArtCraft Studio 没有任何无头 CLI。
+**没有可用 app 的格式**（如实告知，不要硬试）：`.prproj`（依据 FilmCraft 文档暂不支持，需先在 Premiere 导出 FCPXML/AAF/OTIO；尚无真实样本复核）、`.indb` `.indl`、`.key` `.pages` `.numbers`；ArtCraft Studio 没有任何无头 CLI。
 
 ## 第 3 步：按任务选命令
 
@@ -101,16 +101,23 @@ deckcraft-cli render deck.pptx --all slides\     # 每页 slide-01.png …
 先 `commands` 看命令目录；`describe <id>`（DeckCraft/PDFCraft/VectorCraft/EffectCraft…）或 `--help` 看参数。语法因 app 而异：
 
 ```powershell
-wordcraft-cli run --cmd 'text.insertText={"text":"Hello"}' --save out.docx
-gridcraft-cli run --in book.xlsx --cmd 'sheet.setCell={"sheet":"Sheet1","cell":"A1","value":"Hi"}' --out book.xlsx
+wordcraft-cli run --cmd 'text.insert={"text":"Hello"}' --save out.docx
+gridcraft-cli run --in book.xlsx --cmd 'cell.set={"cell":"A1","value":"Hi"}' --out book.xlsx
 deckcraft-cli run --cmd 'slide.new={"title":"Q3 results"}' --save q3.deckcraft
-vectorcraft-cli run --in art.ai --cmd path.offset --params '{"dx":10}' --export out.svg
+vectorcraft-cli run --in art.ai --cmd object.path.offsetPath --params '{"offset":10}' --export out.svg   # 需先选中路径
 cadcraft-cli run plan.dxf --script-file setup.scr --save out.dxf
 effectcraft-cli script title.jsx project.ecproj   # After Effects 风格 JSX 对象模型
 filmcraft-cli exec timeline.razor seconds=3.5     # key=value 参数，值能解析为 JSON 就解析
 lightcraft-cli run --import photo.jpg develop.set control=light.exposure value=0.7 develop.auto app.export path=out.jpg
 solidcraft-cli run design.sc --out part.step      # 旧写法 input.scad --export 已过时
 ```
+
+编辑类命令的实测要点：
+
+- `--cmd` 的写法分两派：**WordCraft / DeckCraft / GridCraft / PhotoCraft** 用 `--cmd 'id={json}'`；**VectorCraft / EffectCraft** 用 `--cmd ID --params '<json>'`（EffectCraft 是 `exec ID --params`）。命令 ID 以 `commands` 列出的为准。
+- EffectCraft / FilmCraft 的 `--save` / `--save-as` **只在工程被改动后才落盘**：先跑一条变更命令（如 `comp.new`、`file.newBin`）再保存，否则静默不写文件。
+- FigCraft `export` / `render` 的输出路径是 `-o` / `--out` 选项，不是位置参数。
+- 长任务放宽超时：SolidCraft 的 `run → step`、`snapshot`、FilmCraft 的 PNG 导出可能各需 60–100 秒，建议 180–240 秒超时。
 
 ### 批量
 ```powershell

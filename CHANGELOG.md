@@ -21,6 +21,11 @@ Fork release: [`kingfree/dsh-artcraft`](https://github.com/kingfree/dsh-artcraft
   format gaps) in `skills/craft-app-cli/references/apps.md`.
 - `docs`: README / README.zh-CN.md sections for the file-format routing skill;
   `skills/README.md` index updated to thirteen skills.
+- `docs(test)`: `docs/craft-app-cli-verified.md` — measured evidence from a
+  22-chain / 123-command run across 36 extensions (all exit 0), plus the
+  command-syntax fixes it produced in the shipped skill
+  (`text.insert`, `cell.set`, `object.path.offsetPath` params, output-flag
+  placement, save-after-edit rule, long-task timeouts).
 
 ## [0.3.1] -- 2026-10-17
 

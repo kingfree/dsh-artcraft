@@ -182,6 +182,7 @@ $sk = '<repo>\skills\craft-app-cli\scripts\craft-cli.ps1'
 - Covers 17 CLIs: 16 family members plus third-party SolidCraft; `Craft Anything` for unknown files; `ArtCraft Studio` has no headless CLI.
 - Gaps are reported honestly: `.prproj` (export FCPXML/AAF/OTIO first), `.indb/.indl`, `.key/.pages/.numbers`, `.indd` (read-only, cannot save back).
 - Details: `skills/craft-app-cli/references/apps.md` — per-CLI install paths, subcommands, read/write formats, MCP, gaps (measured on this machine).
+- Verified evidence: [docs/craft-app-cli-verified.md](docs/craft-app-cli-verified.md) (22 chains / 123 final commands, all exit 0, 36 extensions covered).
 
 ## Driving it from the browser
 

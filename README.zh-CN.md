@@ -167,6 +167,7 @@ $sk = '<本仓库>\skills\craft-app-cli\scripts\craft-cli.ps1'
 - 覆盖 17 个 CLI：家族 16 个 + 第三方 SolidCraft；`Craft Anything` 用于未知格式初查；`ArtCraft Studio` 没有无头 CLI。
 - 缺口如实告知：`.prproj`（需先在 Premiere 导出 FCPXML/AAF/OTIO）、`.indb/.indl`、`.key/.pages/.numbers`、`.indd`（只读，不能写回）。
 - 细节见 `skills/craft-app-cli/references/apps.md`：17 个 CLI 的安装路径、子命令、读写格式、MCP 接入与格式缺口（本机实测）。
+- 实测证据：[docs/craft-app-cli-verified.md](docs/craft-app-cli-verified.md)（22 组链路 / 123 条最终命令全 exit 0，覆盖 36 种扩展名）。
 
 ## 在浏览器里驱动
 
